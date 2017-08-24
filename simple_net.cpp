@@ -706,7 +706,7 @@ void simple_net(int times = 100) {
       stream(stream::kind::eager).submit(net).wait();
 //      stream(stream::kind::lazy).submit(net).wait();
       long end = chrono::duration_cast<chrono::milliseconds>(chrono::steady_clock::now().time_since_epoch()).count();
-      printf("Times %d use time %ld", j, (end - begin));
+      printf("Times %d use time %ld\n", j, (end - begin));
     }
   }
 }
