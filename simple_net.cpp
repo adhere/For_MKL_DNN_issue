@@ -180,10 +180,10 @@ void simple_net(int times = 100) {
                                   pool1_indices_memory));
 
     /* AlexNet: conv2
-    * {batch, 96, 27, 27} (x) {256, 96, 27, 27} -> {batch, 256, 27, 27}
+    * {batch, 96, 27, 27} (x) {2, 128, 48, 5, 5} -> {batch, 256, 27, 27}
     * strides: {1, 1}
     */
-    memory::dims conv2_weights_tz = {256, 96, 5, 5};
+    memory::dims conv2_weights_tz = {2, 128, 48, 5, 5};
     memory::dims conv2_bias_tz = {256};
     memory::dims conv2_dst_tz = {batch, 256, 27, 27};
     memory::dims conv2_strides = {1, 1};
@@ -196,7 +196,7 @@ void simple_net(int times = 100) {
 
     /* create memory for user data */
     auto conv2_user_weights_memory = memory({{{conv2_weights_tz},
-                                              memory::data_type::f32, memory::format::oihw}, cpu_engine},
+                                              memory::data_type::f32, memory::format::goihw}, cpu_engine},
                                             conv2_weights.data());
     auto conv2_user_bias_memory = memory({{{conv2_bias_tz},
                                            memory::data_type::f32, memory::format::x}, cpu_engine},
